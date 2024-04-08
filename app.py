@@ -22,9 +22,8 @@ ADMIN=False # Faut etre ADMIN/mongo pour ecrire dans la base
 #client = MongoClient("mongodb+srv://logincfsujet:pwdcfsujet@cluster0.x0zyf.mongodb.net/?retryWrites=true&w=majority")
 client = MongoClient("mongodb+srv://visitor:doliprane@cluster0.x0zyf.mongodb.net/?retryWrites=true&w=majority")
 
-# db is an attribute of client =>  all databases 
-
-# Looking for "WaterBnB" database
+#-----------------------------------------------------------------------------
+# Looking for "WaterBnB" database in the cluster
 #https://stackoverflow.com/questions/32438661/check-database-exists-in-mongodb-using-pymongo
 dbname= 'WaterBnB'
 dbnames = client.list_database_names()
@@ -32,9 +31,10 @@ if dbname in dbnames:
     print(f"{dbname} is there!")
 else:
     print("YOU HAVE to CREATE the db !\n")
-    
+
 db = client.WaterBnB
 
+#-----------------------------------------------------------------------------
 # Looking for "users" collection in the WaterBnB database
 collname= 'users'
 collnames = db.list_collection_names()
@@ -44,6 +44,7 @@ else:
     print(f"YOU HAVE to CREATE the {collname} collection !\n")
     
 userscollection = db.users
+
 #-----------------------------------------------------------------------------
 # import authorized users .. if not already in ?
 if ADMIN :
@@ -67,14 +68,14 @@ app = Flask(__name__)
 # https://stackoverflow.com/questions/49664010/using-variables-across-flask-routes
 app.secret_key = 'BAD_SECRET_KEY'
   
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+#-----------------------------------------------------------------------------
 @app.route('/')
 def hello_world():
     return render_template('index.html') #'Hello, World!'
 
 #Test with =>  curl https://waterbnbf.onrender.com/
 
-#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+#-----------------------------------------------------------------------------
 """
 #https://stackabuse.com/how-to-get-users-ip-address-using-flask/
 @app.route("/ask_for_access", methods=["POST"])
