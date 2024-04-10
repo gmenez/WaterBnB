@@ -53,7 +53,7 @@ if ADMIN :
     for l in excel : #import in mongodb
         ls = (l[0].split(';'))
         #print(ls)
-        if userscollection.find_one({"name" : ls[0]}) ==  None:
+        if userscollection.find_one({"name" : ls[0]}) ==  None :
             userscollection.insert_one({"name": ls[0], "num": ls[1]})
     
 
@@ -179,7 +179,7 @@ def handle_mqtt_message(client, userdata, msg):
         decoded_message =str(msg.payload.decode("utf-8"))
         #print("\ndecoded message received = {}".format(decoded_message))
         dic =json.loads(decoded_message) # from string to dict
-        #print("\n Dictionnary  received = {}".format(dic))
+        print("\n Dictionnary  received = {}".format(dic))
 
         who = dic["info"]["ident"] # Qui a publié ?
         t = dic["status"]["temperature"] # Quelle température ?
@@ -187,7 +187,6 @@ def handle_mqtt_message(client, userdata, msg):
 
 #%%%%%%%%%%%%%  main driver function
 if __name__ == '__main__':
-
     
     # run() method of Flask class runs the application 
     # on the local development server.
