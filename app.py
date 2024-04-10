@@ -178,11 +178,11 @@ def handle_mqtt_message(client, userdata, msg):
     if (msg.topic == topicname) : # cf https://stackoverflow.com/questions/63580034/paho-updating-userdata-from-on-message-callback
         decoded_message =str(msg.payload.decode("utf-8"))
         #print("\ndecoded message received = {}".format(decoded_message))
-        d =json.loads(decoded_message) # from string to dict
+        dic =json.loads(decoded_message) # from string to dict
         print("\n Dictionnary  received = {}".format(dic))
 
-        who = d["info"]["ident"] # Qui a publié ?
-        t = d["status"]["temperature"] # Quelle température ?
+        who = dic["info"]["ident"] # Qui a publié ?
+        t = dic["status"]["temperature"] # Quelle température ?
 
 
 #%%%%%%%%%%%%%  main driver function
