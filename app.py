@@ -18,7 +18,7 @@ from pymongo import MongoClient
 
 # Connect to Cluster Mongo : attention aux permissions "network"/MONGO  !!!!!!!!!!!!!!!!
 ADMIN=False # Faut etre ADMIN/mongo pour ecrire dans la base
-#client = MongoClient("mongodb+srv://menez:monpassadminQ@cluster0.x0zyf.mongodb.net/?retryWrites=true&w=majority")
+#client = MongoClient("mongodb+srv://menez:i.....Q@cluster0.x0zyf.mongodb.net/?retryWrites=true&w=majority")
 #client = MongoClient("mongodb+srv://logincfsujet:pwdcfsujet@cluster0.x0zyf.mongodb.net/?retryWrites=true&w=majority")
 client = MongoClient("mongodb+srv://visitor:doliprane@cluster0.x0zyf.mongodb.net/?retryWrites=true&w=majority")
 
@@ -188,6 +188,7 @@ def handle_mqtt_message(client, userdata, msg):
 #%%%%%%%%%%%%%  main driver function
 if __name__ == '__main__':
 
+    
     # run() method of Flask class runs the application 
     # on the local development server.
     app.run(debug=False) #host='127.0.0.1', port=5000)
