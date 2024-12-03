@@ -49,7 +49,7 @@ userscollection = db.users
 # import authorized users .. if not already in ?
 if ADMIN :
     userscollection.delete_many({})  # empty collection
-    excel = csv.reader(open("usersM1_2024.csv")) # list of authorized users
+    excel = csv.reader(open("usersM1_2025.csv")) # list of authorized users
     for l in excel : #import in mongodb
         ls = (l[0].split(';'))
         #print(ls)
