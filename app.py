@@ -167,11 +167,7 @@ def handle_connect(client, userdata, flags, rc):
 def handle_mqtt_message(client, userdata, msg):
     global topicname
     
-    data = dict(
-        topic=msg.topic,
-        payload=msg.payload.decode()
-    )
-    #    print('Received message on topic: {topic} with payload: {payload}'.format(**data))
+    #    print(f'Received message on topic: {msg.topic} 
     print("\n msg.topic = {}".format(msg.topic))
     print("\n topicname = {}".format(topicname))
     
