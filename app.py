@@ -137,17 +137,22 @@ def publish_message():
     """
     content_type = request.headers.get('Content-Type')
     print("\n Content type = {}".format(content_type))
+
     request_data = request.get_json()
-    print("\n publish msg = {}".format(request_data['msg']))
-    print("\n on topic = {}".format(request_data['topic']))
+    msg_fromreq =  request_data['msg']
+    topic_fromreq = request_data['topic']
+    print(f"\n Now we will publish msg = {msg_fromreq}")
+    print(f"\n on topic = {topic_fromreq}")
     
-    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'],2)
+    publish_result = mqtt_client.publish(topic_fromreq, msg_fromreq, qos=2)
+
     print(f"\n publish_result is {publish_result}\n")
     return  jsonify({'code': publish_result[0]})
-
+    
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
 # Initialisation MQTT
-app.config['MQTT_BROKER_URL'] =  "test.mosquitto.org"
+#app.config['MQTT_BROKER_URL'] =  "test.mosquitto.org"
+app.config['MQTT_BROKER_URL'] =  "broker.hivemq.com"
 app.config['MQTT_BROKER_PORT'] = 1883
 #app.config['MQTT_USERNAME'] = ''  # Set this item when you need to verify username and password
 #app.config['MQTT_PASSWORD'] = ''  # Set this item when you need to verify username and password
