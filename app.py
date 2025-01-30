@@ -133,6 +133,7 @@ def publish_message():
     mosquitto_sub -h test.mosquitto.org -t gillou
     mosquitto_pub -h test.mosquitto.org -t gillou -m tutu
     curl -X POST -H Content-Type:application/json -d "{\"topic\":\"gillou\",\"msg\":\"hello\"}"  https://waterbnbf.onrender.com/publish
+    curl -H 'Content-Type: application/json' -d '{ "topic":"gillou","msg":"gillou"}'  -X POST       https://waterbnbf.onrender.com/publish
     """
     content_type = request.headers.get('Content-Type')
     print("\n Content type = {}".format(content_type))
@@ -140,7 +141,7 @@ def publish_message():
     print("\n publish msg = {}".format(request_data['msg']))
     print("\n on topic = {}".format(request_data['topic']))
     
-    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg',2])
+    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'],2)
     print(f"\n publish_result is {publish_result}\n")
     return  jsonify({'code': publish_result[0]})
 
