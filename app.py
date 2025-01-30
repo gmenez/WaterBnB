@@ -144,25 +144,26 @@ def publish_message():
     print(f"\n Now we will publish msg = {msg_fromreq}")
     print(f"\n on topic = {topic_fromreq}")
     
-    publish_result = mqtt_client.publish(topic_fromreq, msg_fromreq, qos=2)
+    publish_result = mqtt_client.publish(topic_fromreq, msg_fromreq, qos=2) # Ce depend un peu beauooup de la forme du brooker !
 
-    print(f"\n publish_result is {publish_result}\n")
+    print(f"\n publish_result is {publish_result}\n") # j'ai l'impression que le publish se fait .... mais apres ???? 
     return  jsonify({'code': publish_result[0]})
     
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
 # Initialisation MQTT
-#app.config['MQTT_BROKER_URL'] =  "test.mosquitto.org"
-app.config['MQTT_BROKER_URL'] =  "broker.hivemq.com"
+app.config['MQTT_BROKER_URL'] =  "test.mosquitto.org"
+#app.config['MQTT_BROKER_URL'] =  "broker.hivemq.com"
 app.config['MQTT_BROKER_PORT'] = 1883
 #app.config['MQTT_USERNAME'] = ''  # Set this item when you need to verify username and password
 #app.config['MQTT_PASSWORD'] = ''  # Set this item when you need to verify username and password
 #app.config['MQTT_KEEPALIVE'] = 5  # Set KeepAlive time in seconds
 app.config['MQTT_TLS_ENABLED'] = False  # If your broker supports TLS, set it True
 
+mqtt_client = Mqtt(app)
 topicname = "uca/iot/piscine"
 
-mqtt_client = Mqtt(app)
-
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# MQTT callbacks
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
    if rc == 0:
@@ -171,7 +172,8 @@ def handle_connect(client, userdata, flags, rc):
    else:
        print('Bad connection. Code:', rc)
 
-
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+# MQTT callbacks
 @mqtt_client.on_message()
 def handle_mqtt_message(client, userdata, msg):
     global topicname
