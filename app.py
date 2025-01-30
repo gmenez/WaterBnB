@@ -137,7 +137,8 @@ def publish_message():
     content_type = request.headers.get('Content-Type')
     print("\n Content type = {}".format(content_type))
     request_data = request.get_json()
-    print("\n topic = {}".format(request_data['topic']))
+    print("\n publish msg = {}".format(request_data['msg']))
+    print("\n on topic = {}".format(request_data['topic']))
     
     publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
     return jsonify({'code': publish_result[0]})
@@ -152,6 +153,7 @@ app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_TLS_ENABLED'] = False  # If your broker supports TLS, set it True
 
 topicname = "uca/iot/piscine"
+
 mqtt_client = Mqtt(app)
 
 @mqtt_client.on_connect()
