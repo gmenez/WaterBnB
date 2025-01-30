@@ -140,7 +140,7 @@ def publish_message():
     print("\n publish msg = {}".format(request_data['msg']))
     print("\n on topic = {}".format(request_data['topic']))
     
-    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg'])
+    publish_result = mqtt_client.publish(request_data['topic'], request_data['msg',2])
     print(f"\n publish_result is {publish_result}\n")
     return  jsonify({'code': publish_result[0]})
 
